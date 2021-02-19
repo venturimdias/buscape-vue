@@ -1,5 +1,7 @@
 <template>
   <div class="produtos container">
+
+    {{carrinho}}
     <ul class="lista">
       <li class="item grid" v-for="prod in prods" :key="prod.product.id">
         <Foto :fotos="prod.product.images" />
@@ -39,6 +41,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 import axios from "axios";
 import Foto from "./Foto";
 //import store from "../../store";
@@ -50,18 +53,16 @@ export default {
   data() {
     return {
       prods: [],
-      carrinho: [],
-      //store: store,
     };
   },
   mounted() {
-    this.getProds();
+    this.getProds()
   },
   methods: {
     async getProds() {
       await axios
         .get(
-          `https://raw.githubusercontent.com/venturimdias/buscape-company/main/src/data/data.json`
+          `https://raw.githubusercontent.com/venturimdias/buscape-vue/master/src/data/data.json`
         )
         .then((response) => {
           this.prods = response.data.items;
@@ -78,20 +79,12 @@ export default {
     },
     adicionarCarrinho(item) {
       console.log(item);
-
-      //console.log(this.store.getters.getCarrinho);
-
-      // let existe = localStorage.getItem("Carrinho");
-
-      // if (existe != null) {
-      //   // adicionar novo item
-      // } else {
-      //   let produto = JSON.stringify(item);
-
-      //   localStorage.setItem("Carrinho", produto);
-      // }
     },
+    ...mapActions({ adicionarCarrinho: "setCarrinho" }),
   },
+  computed:{
+    ...mapGetters({ carrinho: "getCarrinho" })
+  }
 };
 </script>
 
