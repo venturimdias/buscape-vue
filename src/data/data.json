@@ -1,0 +1,67 @@
+{
+    "items": [
+      {
+        "product": {
+          "id": 2321312,
+          "name": "Smartphone Apple iPhone 7 128GB",
+          "images": [
+            "https://i.zst.com.br/thumbs/12/34/15/159621763.jpg",
+            "https://i.zst.com.br/thumbs/12/2c/15/159621772.jpg",
+            "https://i.zst.com.br/thumbs/12/30/34/187675206.jpg",
+            "https://i.zst.com.br/thumbs/12/36/15/159621774.jpg",
+            "https://i.zst.com.br/thumbs/12/1b/15/159621775.jpg"
+          ],
+          "label": true,
+          "price": {
+            "value": 3509.1,
+            "installments": 10,
+            "installmentValue": 389.9
+          }
+        }
+      },
+      {
+        "product": {
+          "id": 9971,
+          "name": "Smart TV Samsung Série 4 UN32J4300AG 32 polegadas LED Plana",
+          "images": [
+            "https://i.zst.com.br/thumbs/12/14/38/1104888349.jpg",
+            "https://i.zst.com.br/thumbs/12/24/38/1104888350.jpg"
+          ],
+          "price": {
+            "value": 1139.9,
+            "installments": 10,
+            "installmentValue": 134.11
+          }
+        }
+      },
+      {
+        "product": {
+          "id": 6717131,
+          "name": "Geladeira Electrolux RFE39 Frost Free 1 Porta 323 Litros Painel Blue Touch",
+          "images": ["https://i.zst.com.br/thumbs/12/22/31/22155150.jpg"],
+          "price": {
+            "value": 1671.12,
+            "installments": 12,
+            "installmentValue": 158.25
+          }
+        }
+      },
+      {
+        "product": {
+          "id": 6717120,
+          "name": "Notebook Lenovo IdeaPad S145 81S90003BR Intel Core i7 8565U 15,6 8GB HD",
+          "images": [
+            "https://i.zst.com.br/thumbs/12/32/1a/857945648.jpg",
+            "https://i.zst.com.br/thumbs/12/17/1a/857945649.jpg"
+          ],
+          "label": true,
+          "price": {
+            "value": 4004.91,
+            "installments": 12,
+            "installmentValue": 370.83
+          }
+        }
+      }
+    ]
+  }
+  
