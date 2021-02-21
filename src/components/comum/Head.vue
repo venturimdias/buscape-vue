@@ -101,7 +101,6 @@
           </g>
         </svg>
       </a>
-
       <Carrinho />
     </div>
   </div>
@@ -109,10 +108,20 @@
 
 <script>
 import Carrinho from "../../components/carrinho/Carrinho";
+import store from "../../store"
+
 export default {
+  store,
+  data(){
+    return{
+        aba: this.$store.state.abaCarrinho
+    }
+  },
   components: {
     Carrinho,
   },
+  methods:{
+  }
 };
 </script>
 

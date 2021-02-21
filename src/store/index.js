@@ -5,21 +5,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({ 
   state:{
-      carrinho: ["teste"]
+      carrinho: [],
+      count: 0,
+      totalCarrinho: [],
+      abaCarrinho: false,
   },
   mutations:{
       setCarrinho(state, setState){
-         state.carrinho.push(setState) 
-      }
+        state.carrinho.push(setState)
+      },
+      setRemoverCarrinho(state, setIndex){
+        state.carrinho.splice(setIndex,1)
+      },
   },
-  actions: {
-    // async setCurrentJoke(state) {
-    //   state.commit("setCarrinho", )
-    // }
+  actions: {       
   },
   getters:{
-    getCarrinho: state => state.carrinho
   }
-
-
 })

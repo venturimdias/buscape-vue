@@ -1,12 +1,12 @@
 <template>
   <div class="produtos container">
-
-    {{carrinho}}
+    <ListaCarrinho :items="itemsCarrinho" />
     <ul class="lista">
       <li class="item grid" v-for="prod in prods" :key="prod.product.id">
         <Foto :fotos="prod.product.images" />
 
         <div class="desc">
+            {{prod.product.id}}
           <h2>{{ prod.product.name }}</h2>
           <span v-if="prod.product.label" class="melhor-preco">
             Melhor preço
@@ -41,18 +41,22 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
 import axios from "axios";
 import Foto from "./Foto";
-//import store from "../../store";
+import store from "../../store";
+import ListaCarrinho from "../carrinho/ListaCarrinho"
 
 export default {
   components: {
     Foto,
+    ListaCarrinho
   },
+  store,
   data() {
     return {
       prods: [],
+      itemsCarrinho: this.$store.state.carrinho,
+      total: this.$store.state.totalCarrinho
     };
   },
   mounted() {
@@ -78,12 +82,19 @@ export default {
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
     adicionarCarrinho(item) {
-      console.log(item);
+      //console.log(item, 'cliquei add carrinho')
+
+      let existeItem = this.itemsCarrinho.findIndex(x => x.id === item.id);
+      
+      if(existeItem === -1){
+        this.$store.commit('setCarrinho', item)
+        //console.log('vou adicionar', existeItem)  
+      }else{
+        console.log("Item já cadastrado")
+      }
     },
-    ...mapActions({ adicionarCarrinho: "setCarrinho" }),
   },
   computed:{
-    ...mapGetters({ carrinho: "getCarrinho" })
   }
 };
 </script>
