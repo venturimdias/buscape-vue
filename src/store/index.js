@@ -6,9 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({ 
   state:{
       carrinho: [],
-      count: 0,
       totalCarrinho: [],
-      abaCarrinho: false,
+      exibirCarrinho: false,
   },
   mutations:{
       setCarrinho(state, setState){
@@ -17,6 +16,10 @@ export default new Vuex.Store({
       setRemoverCarrinho(state, setIndex){
         state.carrinho.splice(setIndex,1)
       },
+      setExibirCarrinho(state, setExibir){
+        state.exibirCarrinho = setExibir
+        console.log('state: ',state.exibirCarrinho, setExibir)
+      }
   },
   actions: {       
   },

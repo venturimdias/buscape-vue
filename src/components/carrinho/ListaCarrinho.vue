@@ -1,6 +1,5 @@
 <template>
-    <div class="lista-carrinho abs">
-        {{aba}}
+    <div class="lista-carrinho abs" v-if="this.$store.state.exibirCarrinho">
         <div class="container">
             <ul>
                 <li v-for="(item, index) in items" :key="index">
@@ -32,12 +31,12 @@
 
 <script>
 import store from "../../store"
+
 export default {
     props:['items'],
     store,
     data(){
         return{
-            aba: this.$store.state.abaCarrinho,
         }
     },
     mounted(){

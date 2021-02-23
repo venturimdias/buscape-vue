@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import store from "../../store";
+import store from "../../store"
 
 export default {
   props: ["item"],
@@ -30,21 +30,20 @@ export default {
   data() {
     return {
         carrinho: this.$store.state.carrinho,
-        aba: this.$store.state.abaCarrinho        
+        aba: this.$store.state.exibirCarrinho      
     };
   },
   computed: {
   },
   methods:{
-    
     abrirCarrinho(){
       this.aba = !this.aba
-      this.$store.state.abaCarrinho = !this.aba
-      console.log('aba: ', this.$store.state.abaCarrinho)
+      this.$store.commit('setExibirCarrinho', this.aba)
+      //console.log('aba: ', this.aba)
     }
   },
   mounted() {
-    //console.log(this.carrinho)
+    //console.log(this.aba)
   },
 };
 </script>

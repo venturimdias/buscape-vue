@@ -37,6 +37,7 @@
         </div>
       </li>
     </ul>
+    <Mensagem :msg="msg" :ativo="ativar" />
   </div>
 </template>
 
@@ -45,18 +46,22 @@ import axios from "axios";
 import Foto from "./Foto";
 import store from "../../store";
 import ListaCarrinho from "../carrinho/ListaCarrinho"
+import Mensagem from "../comum/Mensagem"
 
 export default {
   components: {
     Foto,
-    ListaCarrinho
+    ListaCarrinho,
+    Mensagem
   },
   store,
   data() {
     return {
       prods: [],
       itemsCarrinho: this.$store.state.carrinho,
-      total: this.$store.state.totalCarrinho
+      total: this.$store.state.totalCarrinho,
+      msg: '',
+      ativar: false
     };
   },
   mounted() {
@@ -88,11 +93,19 @@ export default {
       
       if(existeItem === -1){
         this.$store.commit('setCarrinho', item)
-        //console.log('vou adicionar', existeItem)  
+        this.msg = "Item adicionado no carrinho"
+        //console.log('vou adicionar', existeItem) 
+        this.exibirMensagem()
       }else{
-        console.log("Item já cadastrado")
+        this.msg = 'Já existe esse item no carrinho'
+        //console.log("Item já cadastrado")
+        this.exibirMensagem()
       }
     },
+    exibirMensagem(){
+      this.ativo = true
+      setTimeout(() => { this.ativar = false }, 2000)
+    }
   },
   computed:{
   }
