@@ -40,6 +40,7 @@ export default {
         }
     },
     mounted(){
+        console.log(this.itens)
     },
     methods:{
         // FORMATAR O VALOR
@@ -71,7 +72,6 @@ export default {
 
     }
 }
-
 </script>
 
 <style>

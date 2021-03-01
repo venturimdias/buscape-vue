@@ -1,8 +1,10 @@
 <template>
   <div class="produtos container">
     <ListaCarrinho :items="itemsCarrinho" />
+
     <ul class="lista">
-      <li class="item grid" v-for="prod in prods" :key="prod.product.id">
+      <li class="item grid" v-for="prod in produtos" :key="prod.product.id">
+
         <Foto :fotos="prod.product.images" />
 
         <div class="desc">
@@ -35,16 +37,18 @@
             </div>
           </div>
         </div>
+
       </li>
     </ul>
-    <Mensagem :msg="msg" :ativo="ativar" />
+
+    <Mensagem :texto="msg" />
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import Foto from "./Foto";
-import store from "../../store";
+import { mapState } from 'vuex'
+import Foto from "./Foto"
+import store from "../../store"
 import ListaCarrinho from "../carrinho/ListaCarrinho"
 import Mensagem from "../comum/Mensagem"
 
@@ -60,56 +64,38 @@ export default {
       prods: [],
       itemsCarrinho: this.$store.state.carrinho,
       total: this.$store.state.totalCarrinho,
-      msg: '',
-      ativar: false
+      msg: null,
     };
   },
+  computed: mapState(['produtos']), // Subistitui o DATA prods / é uma variável
   mounted() {
-    this.getProds()
+    // preciso disparar na hora que monta o componente o getProdutosStore
+    // que esta no arquivo store
+    // https://dev.to/ljnce/how-to-call-api-from-axios-in-vuex-store-2m3g
+
+    // console.log(this.$store.produtos)
+    this.$store.dispatch('getProdutosStore')
+  },
+  created(){
   },
   methods: {
-    async getProds() {
-      await axios
-        .get(
-          `https://raw.githubusercontent.com/venturimdias/buscape-vue/master/src/data/data.json`
-        )
-        .then((response) => {
-          this.prods = response.data.items;
-          //console.log(response.data.items, 2);
-        })
-        .catch((response) => {
-          console.log(response);
-        });
-    },
     // FORMATAR O VALOR
     formatPrice(value) {
       let val = (value / 1).toFixed(2).replace(".", ",");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
     adicionarCarrinho(item) {
-      //console.log(item, 'cliquei add carrinho')
-
       let existeItem = this.itemsCarrinho.findIndex(x => x.id === item.id);
       
       if(existeItem === -1){
         this.$store.commit('setCarrinho', item)
-        this.msg = "Item adicionado no carrinho"
-        //console.log('vou adicionar', existeItem) 
-        this.exibirMensagem()
+        this.msg = 'Item adicionado no carrinho'
       }else{
-        this.msg = 'Já existe esse item no carrinho'
-        //console.log("Item já cadastrado")
-        this.exibirMensagem()
+        this.msg = 'Já existe este item no carrinho'
       }
-    },
-    exibirMensagem(){
-      this.ativo = true
-      setTimeout(() => { this.ativar = false }, 2000)
     }
   },
-  computed:{
-  }
-};
+}
 </script>
 
 <style>
@@ -201,5 +187,12 @@ export default {
 }
 .box-preco .btn-add a:hover {
   background: var(--cor4a);
+}
+
+
+@media(max-width:760px){
+   .produtos .lista .item{ grid-template-columns:1fr; gap:20px; }
+   .produtos .lista .item .box-preco{ grid-template-columns: 1fr; gap:20px;}
+   .box-preco .btn-add a{ justify-content: center; }
 }
 </style>

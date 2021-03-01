@@ -1,20 +1,41 @@
 <template>
-  <div class="msg fx" :class="ativo ? 'ativo' : '' ">
-      {{ativo}} {{msg}}
-  </div>
+    <transition name="fade">
+    <div class="msg fx" v-show="isActive == !isActive">
+        <button type="button" class="abs" @click="isActive = false">X</button>
+        {{ texto }}
+    </div>
+    </transition>
 </template>
 
 <script>
+import store from '../../store'
 export default {
-    props: ["msg", "ativo"],
-}
+    store,
+    props: ["texto"],
+    data(){
+        return{
+            isActive: false
+        }
+    },
+    watch:{
 
+    },
+    methods:{
+    },
+    mounted(){
+        console.log(this.isActive)
+    }
+}
 </script>
 
 <style>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active em versões anteriores a 2.1.8 */ {
+  opacity: 0;
+}
 .msg{
-    display:none;
-    opacity:0;
     position:fixed;
     border-radius:10px;
     background:var(--cor4);
@@ -27,7 +48,6 @@ export default {
     font-size:.8rem;
 }
 .msg.ativo{
-    display:block;
     opacity:1;
     /* animation:ativarMsg 2s reverse */
 }
@@ -37,4 +57,5 @@ export default {
  90%{ opacity:1; }
  100% { opacity:0; }
 }
+
 </style>
