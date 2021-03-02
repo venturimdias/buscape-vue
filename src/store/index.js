@@ -10,6 +10,7 @@ export default new Vuex.Store({
       carrinho: [],
       totalCarrinho: [],
       exibirCarrinho: false,
+      exibirMsg: false
   },
   actions: {      
     getProdutosStore({ commit }){
@@ -39,7 +40,17 @@ export default new Vuex.Store({
       },
       SET_Produtos(state, items) {
         state.produtos = items
+      },
+      setExibirMsg(state, setExibir){
+          state.exibirMsg = setExibir
+
+      },
+      setOcultarMsg(state, ms){
+        state.exibirMsg = setTimeout(function(){
+          state.exibirMsg = false;
+        }, ms);
       }
+      
   },
   getters:{
     /*

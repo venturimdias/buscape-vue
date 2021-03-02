@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
-    <div class="msg fx" v-show="isActive == !isActive">
-        <button type="button" class="abs" @click="isActive = false">X</button>
+    <div class="msg fx" :class="tipo" v-show="this.$store.state.exibirMsg" >
+        <button type="button" class="abs" @click="ocultarBox">X</button>
         {{ texto }}
     </div>
     </transition>
@@ -11,34 +11,33 @@
 import store from '../../store'
 export default {
     store,
-    props: ["texto"],
-    data(){
-        return{
-            isActive: false
-        }
-    },
-    watch:{
-
-    },
+    props: ["texto", "tipo"],
     methods:{
-    },
-    mounted(){
-        console.log(this.isActive)
+        ocultarBox: function(){
+            this.$store.commit('setExibirMsg', false)
+            return
+        }
     }
 }
 </script>
 
 <style>
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+  transition: opacity .8s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active em versões anteriores a 2.1.8 */ {
   opacity: 0;
 }
+.msg.sucess{
+   background:var(--cor4);
+}
+.msg.alert{
+   background:var(--cor2);
+   color:var(--texto);
+}
 .msg{
     position:fixed;
     border-radius:10px;
-    background:var(--cor4);
     padding:15px 35px;
     bottom:10px;
     left:50%;
@@ -47,9 +46,18 @@ export default {
     font-weight:600;
     font-size:.8rem;
 }
-.msg.ativo{
-    opacity:1;
-    /* animation:ativarMsg 2s reverse */
+.msg button{
+    border-radius:50%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:24px;
+    height:24px;
+    outline:0px;
+    border:0px;
+    box-shadow:0 0 10px rgb(0 0 0 / 25%);
+    top: -5px;
+    right: -5px;
 }
 @keyframes ativarMsg {
  0% {  opacity: 0; }

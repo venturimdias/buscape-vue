@@ -41,7 +41,7 @@
       </li>
     </ul>
 
-    <Mensagem :texto="msg" />
+    <Mensagem :texto="msg" :tipo="tipo" />
   </div>
 </template>
 
@@ -65,6 +65,7 @@ export default {
       itemsCarrinho: this.$store.state.carrinho,
       total: this.$store.state.totalCarrinho,
       msg: null,
+      tipo: null,
     };
   },
   computed: mapState(['produtos']), // Subistitui o DATA prods / é uma variável
@@ -90,9 +91,15 @@ export default {
       if(existeItem === -1){
         this.$store.commit('setCarrinho', item)
         this.msg = 'Item adicionado no carrinho'
+        this.tipo = 'sucess'
       }else{
         this.msg = 'Já existe este item no carrinho'
+        this.tipo = 'alert'
       }
+      //this.$store.state.exibirMsg = true
+
+      this.$store.commit('setExibirMsg', true)
+      this.$store.commit('setOcultarMsg', 2500)
     }
   },
 }
