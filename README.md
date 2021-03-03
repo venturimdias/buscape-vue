@@ -1,6 +1,13 @@
-# BUSCAPE - VUE
+# BUSCAPÉ
 
 Desenvolvido com Vue e Vuex (controle o estado)
+
+<div align="center">
+    <img src="/public/buscape-vue-1.png" style="width:32.333%;" >
+    <img src="/public/buscape-vue-2.png" style="width:32.333%;" >
+    <img src="/public/buscape-vue-3.png" style="width:32.333%;" >
+</div>
+
 
 #### Biblioteca utilizada
 - axios
